@@ -1,0 +1,60 @@
+
+    import React, { Component } from "react";
+    import styled from "styled-components";
+    import { SectionTitle } from "../../../components/sectionTitle";
+    import { Element } from "react-scroll";
+    import { connect } from "react-redux";
+
+    import {
+    addPost,
+    fetchPosts,
+    deletePost,
+    editPost,
+    } from "../../../store/actions/actions";
+    import {  Marginer} from "../../../components/marginer";
+    const MoreAboutContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1em;
+    margin-top:1rem;
+    `;
+
+
+
+
+
+    class Blog extends Component {
+    
+    componentDidMount = () => {
+        this.props.fetchPosts();
+    };
+    
+    render() {
+
+    return (
+        <Element id = "Blog">
+        < MoreAboutContainer>
+
+        <SectionTitle> Blogs</SectionTitle>
+        <Marginer direction="vertical" margin="2rem" />
+
+        
+        </MoreAboutContainer>
+        </Element> 
+        
+    );
+    }
+    }
+
+    const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        posts: state.posts.posts,
+        userid: state.userid,
+    };
+    };
+    export default connect(mapStateToProps, {
+    fetchPosts,
+    })(Blog);
+
